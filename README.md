@@ -1,2 +1,2 @@
 # Python_Projects
- Projects Made While at The Tech Academy
+This repository for projects created while learning how to use the popular language python.
