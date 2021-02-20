@@ -10,7 +10,18 @@ def color_function(name):
         lst.append(msg)
     return lst
 
+def get_name():
+    go = True
+    while go:
+        name = input('What is your name?')
+        if name == '':
+            print("You need to provide your name.")
+        elif name == 'Bob':
+            print("Bob, you may not use this software.")
+        else:
+            go = False
+    lst = color_function(name)
+    for i in lst:
+        print(i)           
 
-lst = color_function('Britnee')
-for i in lst:
-    print(i)
+get_name()
