@@ -2,7 +2,7 @@
 
 import sqlite3
 
-conn = sqlite3.connect('assignment.db') # Create new DB
+conn = sqlite3.connect('assignment.db') # Create new DB and open a connection to it
 
 with conn :
     cur = conn.cursor() # Connect to DB to create a table
@@ -18,7 +18,7 @@ fileList = ('information.docx', 'Hello.txt', 'myImage.png', \
             'myMovie.mpg', 'World.txt', 'data.pdf', 'myPhoto.jpg')
 
 
-conn = sqlite3.connect('assignment.db') # open connection 
+conn = sqlite3.connect('assignment.db') # open connection to DB
 # loop through each object in the tuple for the .txt files
 for txt in fileList:
     if txt.endswith('.txt'):
@@ -26,5 +26,5 @@ for txt in fileList:
             cur = conn.cursor()
             # Add .txt files to tbl_assignment 
             cur.execute("INSERT INTO tbl_assignment (col_file) VALUES (?)", (txt,))
-            print(txt)
-conn.close() 
+            print(txt) # view the files added to tbl_assignment
+conn.close() # close connection to DB
