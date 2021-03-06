@@ -1,8 +1,19 @@
+# Python Ver: 3.9
+#
+# Author: Britnee Murrin
+#
+# Purpose: Phonebook Demo. Demonstrating OOP, Tkinter GUI module,
+#           using Tkinter Parent and Child relationships.
+#
+# Tested OS: This code was written and tested to work with Windows 10
+
 
 import os
 from tkinter import *
 import tkinter as tk
 import sqlite3
+from tkinter import messagebox
+
 
 # import other created modules for phoneBook
 import phoneBook
@@ -139,7 +150,99 @@ def onDelete(self):
                 onDeleted(self) # call the function to clear all of the textboxes and the selected index of listbox
 #####                onRefresh(self) # update the listbox of the changes
                 conn.commit()
-                
+        else:
+            confirm = messagebox.showerror("LAst Record Error", "({}) is the last record in the database and cannot be deleted at this time. \n\nPlease add another record first before you can delete ({}).".format(var_select,var_select))
+    conn.close()
+
+
+def onDeleted(self):
+    # clear the text in these textboxes
+    self.txt_fname.delete(0,END)
+    self.txt_lname.delete(0,END)
+    self.txt_phone.delete(0,END)
+    self.txt_email.delete(0,END)
+## onRefresh(self) # update the listbox of the changes
+    try:
+        index = self.lstList1.curselection()[0]
+        self.lstList1.delete(index)
+    except IndexError:
+        pass
+
+
+def onClear(self):
+    # clear the text in these textboxes
+    self.txt_fname.delete(0,END)
+    self.txt_lname.delete(0,END)
+    self.txt_phone.delete(0,END)
+    self.txt_email.delete(0,END)
+
+def onRefresh(self):
+    # Populate the listbox coinciding with database
+    self.lstList1.delete(0,END)
+    conn = sqlite3.connect('db_phonebook.db')
+    with conn:
+        cursor = conn.cursor()
+        cursor.execute("""SELECT COUNT(*) FROM tbl_phonebook""")
+        count = cursor.fetchone()[0]
+        i = 0
+        while i < count:
+            cursor.execute("""SELECT col_fullname FROM tbl_phonebook""")
+            varList = cursor.fetchall()[i]
+            for item in varList:
+                self.lstList1.insert(0,str(item))
+                i = i + 1
+    conn.close()
+
+def onUpdate(self):
+    try:
+        var_select = self.lstList1.curselection()[0] # inbox of the list selection
+        var_value = self.lstList1.get(var_select) # list selection's text value
+    except:
+        messagebox.showinfo("Missing selection","No name was selected from the list box. \nCancelling the Update request.")
+        return
+    # the user will only be allowed to update changes for phone emails
+    # For name changes, the user will need to delete the entire record to start over.
+    var_phone = self.txt_phone.get().strip() # normalize the data to maintain db integrity
+    var_email = self.txt_email.get().strip()
+    if(len(var_phone) > 0) and (len(var_email) > 0): # ensure that there is data present
+        conn = sqlite3.connect('db_phonebook.db')
+        with conn:
+            cur = conn.cursor()
+            # count records to see if the user's changes are already in
+            # the db.. meaning, there are no changes to update.
+            cur.execute("""SELECT COUNT(col_phone) FROM tbl_phonebook WHERE col_phone = '{}'""".format(var_phone))
+            count = cur.fetchone()[0]
+            print(count)
+            cur.execute("""SELECT COUNT(col_email) FROM tbl_phonebook WHERE col_email = '{}'""".format(var_email))
+            count2 = curfetchone()[0]
+            print(count2)
+            if count == = or count2 == 0: # if proposed changes are not already in db, then proceed
+                response = messagebox.askokcancel("Update Request","The following changes ({}) and ({}) will be implemented for ({}). \n\nProceed with the update request?".format(var_phone,var_email,var_value))
+                print(response)
+                if response:
+                    #conn = sqlite3.connect('db_phonebook.db')
+                    with conn:
+                        cursor = conn.cursor()
+                        cursor.execute("""UPDATE tbl_phonebook SET col_phone = '{0}',col_email = '{1}' WHERE col_fullname = '{2}'""".format(var_phone,var_email,var_value))
+                        onClear(self)
+                        conn.commit()
+                else:
+                    messagebox.showinfo("Cancel request","No changes have been made to ({})".format(var_value))
+            else:
+                messagebox.showinfo("No changes detected","Both ({}) and ({}) \nalready exist in the database for this name. \n\nYour update request has been cancelled.".format(var_phone, var_email))
+            onClear(self)
+        conn.close()
+    else:
+        messagebox.showerror("Missing information","Please selest a name from the list. \nThen edit the phone or email information.")
+    onClear(self)
+
+
+if __name__ == "__main__":
+    pass
+
+
+    
+                                    
                 
  
                 

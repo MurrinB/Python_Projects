@@ -1,5 +1,16 @@
+# Python Ver: 3.9
+#
+# Author: Britnee Murrin
+#
+# Purpose: Phonebook Demo. Demonstrating OOP, Tkinter GUI module,
+#           using Tkinter Parent and Child relationships.
+#
+# Tested OS: This code was written and tested to work with Windows 10
+
+
 from tkinter import *
 import tkinter as tk
+from tkinter import messagebox
 
 # import modules created by me to have access to them here
 import phoneBook
