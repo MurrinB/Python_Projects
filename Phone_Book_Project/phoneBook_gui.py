@@ -32,7 +32,7 @@ def load_gui(self):
     self.lbl_email.grid(row=6,column=0,padx=(27,0),pady=(10,0),sticky=N+W)
 
     self.lbl_user = tk.Label(self.master,text='User: ')
-    self.lal_user.grid(row=0,column=2,padx=(0,0),pady=(10,0),sticky=N+W)
+    self.lbl_user.grid(row=0,column=2,padx=(0,0),pady=(10,0),sticky=N+W)
 
     self.txt_fname = tk.Entry(self.master,text='')
     self.txt_fname.grid(row=1,column=0,rowspan=1,columnspan=2,padx=(30,40),pady=(0,0),sticky=N+E+W)
@@ -51,8 +51,8 @@ def load_gui(self):
     self.lstList1 = Listbox(self.master,exportselection=0,yscrollcommand=self.scrollbar1.set)
     self.lstList1.bind('<<ListboxSelect>>',lambda event: phoneBook_func.onSelect(self,event))
     self.scrollbar1.config(command=self.lstList1.yview)
-    self.scrollbar1.grid(row=1,column=5,rowspan=7,cloumnspan=1,padx=(0,0),pady=(0,0),sticky=N+E+S)
-    self.lstList1.grid(row=1,column=2,rowspan=7,cloumnspan=3,padx=(0,0),pady=(0,0),sticky=N+E+S+W)
+    self.scrollbar1.grid(row=1,column=5,rowspan=7,columnspan=1,padx=(0,0),pady=(0,0),sticky=N+E+S)
+    self.lstList1.grid(row=1,column=2,rowspan=7,columnspan=3,padx=(0,0),pady=(0,0),sticky=N+E+S+W)
 
     # create buttons add/update/delete/close
     self.btn_add = tk.Button(self.master,width=12,height=2,text='Add',command=lambda: phoneBook_func.addToList(self))
