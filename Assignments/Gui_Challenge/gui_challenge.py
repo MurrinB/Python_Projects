@@ -8,6 +8,7 @@ from tkinter import *
 import tkinter as tk
 
 import gui_challenge_gui
+import gui_challenge_func
 
 # Create window
 class ParentWindow(Frame):
