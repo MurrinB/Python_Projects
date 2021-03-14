@@ -12,3 +12,21 @@ import webbrowser
 # import associated module files
 import webpage_gui
 import webpage_main
+
+
+# define function to create webpage on button click
+def OnClick(self):
+    getEntry = self.txt_slogan.get()
+    htmlWeb = open("NewIndex.html", "w")
+    htmlWeb.write(""" <html> \
+                          <body> \
+                              <h1> \
+                              {} \
+                              </h1> \
+                          </body> \
+                        </html>
+                        """.format(getEntry))
+    htmlWeb.close()
+
+
+    webbrowser.open_new_tab('NewIndex.html')

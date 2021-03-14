@@ -20,11 +20,12 @@ def load_gui(self):
     self.lbl_slogan = tk.Label(self.master,text='Enter Your Slogan Here: ')
     self.lbl_slogan.grid(row=0,column=0,columnspan=2,padx=(25,0),pady=(10,0),sticky=N+W)
     self.lbl_slogan.configure(bg='lightblue')
-
-    self.txt_slogan = tk.Entry(self.master,width=50,text='')
+    
+       
+    self.txt_slogan = tk.Entry(self.master,width=50)
     self.txt_slogan.grid(row=1,column=1,columnspan=3,rowspan=2,padx=(50,30),pady=(10,0),sticky=N+S+E+W)
 
-    self.btn_create = tk.Button(self.master,width=12,height=1,text='Create Webpage')
+    self.btn_create = tk.Button(self.master,width=12,height=1,text='Create Webpage',command=lambda: webpage_func.OnClick(self))
     self.btn_create.grid(row=4,column=3,padx=(25,0),pady=(10,50))
 
 if __name__ == "__main__":
