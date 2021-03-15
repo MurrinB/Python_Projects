@@ -17,9 +17,9 @@ class ParentWindow(Frame):
 
         # Frame configuration
         self.master = master
-        self.master.minsize(500,200)
-        self.master.maxsize(500,200)
-        self.master.title("Check Files")
+        self.master.minsize(500,450)
+        self.master.maxsize(500,450)
+        self.master.title("Easy File Transfer")
 
         # load gui widgets from a seperate module
         gui_challenge_gui.load_gui(self)

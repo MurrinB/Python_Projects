@@ -28,9 +28,13 @@ def file_Mod_Time(file):
     return os.path.getmtime(file)
 
 
-# Create loop to iterate through files 
-for file in FolderA:
-    src_file = os.path.join(source, file)
-    if file_Mod_Time(src_file) > currentDate_mod: # loop to compare the modification date with the current date
-        dst_file = os.path.join(destination, file)
-        shutil.move(src_file, dst_file) # transfer to destination folder
+# Create loop to iterate through files
+def file_Transfer():
+    for file in FolderA:
+        src_file = os.path.join(source, file)
+        if file_Mod_Time(src_file) > currentDate_mod: # loop to compare the modification date with the current date
+            dst_file = os.path.join(destination, file)
+            shutil.move(src_file, dst_file) # transfer to destination folder
+
+if __name__ == "__main__":
+    file_Transfer()
